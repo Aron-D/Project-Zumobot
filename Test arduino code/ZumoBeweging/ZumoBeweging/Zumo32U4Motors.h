@@ -1,5 +1,5 @@
 
- #pragma once
+
   
  #include <stdint.h>
   
@@ -7,19 +7,19 @@
  {
    public:
   
-     static void linksAf(bool links);
+      linksAf(bool links);
+
+      rechtsAf(bool rechts);
   
-     static void rechtsAf(bool rechts);
+      linkerSnelheid(int16_t snelheid);
   
-     static void linkerSnelheid(int16_t snelheid);
+      rechterSnelheid(int16_t snelheid);
   
-     static void rechterSnelheid(int16_t snelheid);
-  
-     static void kiesSnelheid(int16_t linkerSnelheid, int16_t rechterSnelheid);
+      kiesSnelheid(int16_t linkerSnelheid, int16_t rechterSnelheid);
   
    private:
   
-     static inline void init()
+      init()
      {
          static bool initialized = false;
   
