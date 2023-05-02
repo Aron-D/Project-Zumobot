@@ -7,15 +7,15 @@
  {
    public:
   
-     static void flipLeftMotor(bool flip);
+     static void linksAf(bool links);
   
-     static void flipRightMotor(bool flip);
+     static void rechtsAf(bool rechts);
   
-     static void setLeftSpeed(int16_t speed);
+     static void linkerSnelheid(int16_t snelheid);
   
-     static void setRightSpeed(int16_t speed);
+     static void rechterSnelheid(int16_t snelheid);
   
-     static void setSpeeds(int16_t leftSpeed, int16_t rightSpeed);
+     static void kiesSnelheid(int16_t linkerSnelheid, int16_t rechterSnelheid);
   
    private:
   
