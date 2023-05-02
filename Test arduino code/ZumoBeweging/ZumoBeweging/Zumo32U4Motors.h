@@ -1,25 +1,23 @@
-
- #pragma once
-  
  #include <stdint.h>
+ #include <iostream>
   
  class Zumo32U4Motors
  {
    public:
   
-     static void flipLeftMotor(bool flip);
+      linksAf(bool links);
+
+      rechtsAf(bool rechts);
   
-     static void flipRightMotor(bool flip);
+      linkerSnelheid(int16_t snelheid);
   
-     static void setLeftSpeed(int16_t speed);
+      rechterSnelheid(int16_t snelheid);
   
-     static void setRightSpeed(int16_t speed);
-  
-     static void setSpeeds(int16_t leftSpeed, int16_t rightSpeed);
+      kiesSnelheid(int16_t linkerSnelheid, int16_t rechterSnelheid);
   
    private:
   
-     static inline void init()
+      init()
      {
          static bool initialized = false;
   
