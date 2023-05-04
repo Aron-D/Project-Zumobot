@@ -9,9 +9,8 @@ int LastXValue = 0;
 int LastYValue = 0;
 int LastZValue = 0;
 
-int NewXValue = 0;
-int NewYValue = 0;
-int NewZValue = 0;
+
+
 
 void setup() {
 Zumo.enableDefault();
@@ -19,43 +18,41 @@ Wire.begin();
 Zumo.init();
 
 
+
 }
 
 void loop() {
 Zumo.readAcc();
-
-
-if (Zumo.accDataReady() == 1) {
-  NewXValue = Zumo.a.x;
-  NewYValue = Zumo.a.y;
-  NewZValue = Zumo.a.z;
- switch (LastXValue, LastYValue, LastZValue, NewXValue, NewYValue, NewZValue) {
-   case NewXValue > LastXValue:
-   Serial.println("Forward");
-   break;
-
-   case NewXValue < LastXValue:
-   Serial.println("Backwards");
-   break;
-
-   case NewYValue > LastYValue:
-   Serial.println("Up");
-   break;
-
-   case NewYValue < LastYValue:
-   Serial.println("Down");
-   break;
-
-   case NewZValue > LastZValue:
-   Serial.println("Left");
-   break;
-
-   case NewZValue < LastZValue:
-   Serial.println("Right");
-   break;
- }
-}
 LastXValue = Zumo.a.x;
 LastYValue = Zumo.a.y;
 LastZValue = Zumo.a.z;
+
+if (LastXValue < -16000) {
+  Serial.println("Voorkant");
 }
+if (LastXValue > 16000) {
+  Serial.println("Achterkant");
+}
+
+if (LastYValue < -16000) {
+  Serial.println("Linkerzijde");
+}
+if (LastYValue > 16000) {
+  Serial.println("rechterzijde");
+}
+
+if (LastZValue < -16000) {
+  Serial.println("Zumo ligt ondersteboven!");
+}
+
+if (LastZValue > 16000) {
+  Serial.println("Zumo staat recht!");
+}
+delay(500);
+}
+
+
+
+
+
+
