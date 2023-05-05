@@ -1,3 +1,10 @@
+/*!
+  @file Heading.ino
+  @date 5 May 2023
+  @author Aron Dosti
+
+*/
+
 //uitroep h file voor class Kompas
 #include "Kompas.h"
 
