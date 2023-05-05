@@ -13,6 +13,7 @@ class IMU {
     IMU();
     void begin();
     void update();
+    
 };
 
 // #endif
@@ -26,7 +27,7 @@ void IMU::begin() {
 
   if (!imu.init())
   {
-    // Failed to detect the compass.
+    // Mislukt om sensor te detecteren.
     ledRed(1);
     while(1)
     {
@@ -37,15 +38,20 @@ void IMU::begin() {
 
   imu.enableDefault();
 }
-
+ 
 void IMU::update() {
   imu.read();
 
-  char report[120];
-  snprintf_P(report, sizeof(report),
-    PSTR("G: %6d %6d %6d"),
-    imu.g.x, imu.g.y, imu.g.z);
-  Serial.println(report);
+  // char report[120];
+  // snprintf_P(report, sizeof(report),
+  //   PSTR("G: %6d %6d %6d"),
+  //   imu.g.x, -imu.g.y, imu.g.z);
+  
+    int yrotatie =  imu.g.y /100;
+    // int yrotatie =  -imu.g.y /-50;
+    // int zrotatie =  -imu.g.z /-5;
 
-  delay(100);
+  Serial.println(yrotatie);
+
+  delay(200);
 }
