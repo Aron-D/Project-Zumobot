@@ -11,7 +11,7 @@
   by Ruben van Eijken
 */
 
-#include "LijnSensor.hpp"
+#include "LijnSensor.h"
 
 /*! Constructor die nu niets doet. */
 LijnSensor::LijnSensor() {
