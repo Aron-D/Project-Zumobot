@@ -1,7 +1,7 @@
 /*!
   @mainpage LijnSensor Zumo
   
-  LijnSensor is een klasse die de lijnsensoren op een Zumo robot kan initialiseren, calibreren en uitlezen.
+  LijnSensor is een klasse die de lijnsensoren op een Zumo robot kan initialiseren, kalibreren en uitlezen.
 */
 
 /*!
@@ -9,12 +9,14 @@
   @date 26 Apr 2023
   @author Ruben van Eijken
 
-  Een klasse die de lijnsensoren op een Zumo robot kan initialiseren, calibreren en uitlezen.
+  Een klasse die de lijnsensoren op een Zumo robot kan initialiseren, kalibreren en uitlezen.
   De Zumo robot heeft vijf lijnsensoren die lichtwaarden meten waardoor een donkere lijn op een lichte achtergrond gedetecteerd kan worden.
 
   modified 26 Apr 2023
   by Ruben van Eijken
   modified 2 May 2023
+  by Ruben van Eijken
+  modified 4 May 2023
   by Ruben van Eijken
 */
 
@@ -23,13 +25,14 @@
 
 #include <Zumo32U4LineSensors.h>
 
-/*! De klasse LijnSensor heeft als functie het initialiseren, calibreren en uitlezen van de lijnsensoren. */
+/*! De klasse LijnSensor heeft als functie het initialiseren, kalibreren en uitlezen van de lijnsensoren. */
 class LijnSensor {
   public:
     LijnSensor();
     void sensoren_initialiseren();
-    void sensoren_calibreren();
+    void sensoren_kalibreren();
     int lijn_positie();
+    int lijn_error();
 
   private:
     Zumo32U4LineSensors lijnSensoren;
@@ -46,14 +49,21 @@ void LijnSensor::sensoren_initialiseren() {
   lijnSensoren.initFiveSensors();
 }
 
-/*! Calibratie door metingen uit te lezen van de lijnsensoren en vervolgens te bepalen wat "licht" en "donker" is. */
-void LijnSensor::sensoren_calibreren() {
-  lijnSensoren.calibrate();
+/*! Kalibratie door metingen uit te lezen van de lijnsensoren en vervolgens te bepalen wat "licht" en "donker" is. */
+void LijnSensor::sensoren_kalibreren() {
+  for(uint16_t i = 0; i < 120; i++)
+  {
+    lijnSensoren.calibrate();
+  }
 }
 
-/*! Geeft aan hoever de Zumo van het midden van de lijn zit. */
+/*! Geeft aan waar de lijn zit. */
 int LijnSensor::lijn_positie() {
   return lijnSensoren.readLine(lijnSensorWaarden);
 }
 
+/*! Geeft de afstand tot de lijn. */
+int LijnSensor::lijn_error() {
+  return lijnSensoren.readLine(lijnSensorWaarden) - 2000;
+}
 #endif

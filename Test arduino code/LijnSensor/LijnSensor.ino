@@ -19,10 +19,10 @@ LijnSensor lijnSensor;
 
 void setup() {
   lijnSensor.sensoren_initialiseren();
-  lijnSensor.sensoren_calibreren();
+  lijnSensor.sensoren_kalibreren();
 }
 
 void loop() {
-  int positie = lijnSensor.lijn_positie();
-  Serial.println(positie);
+  int error = lijnSensor.lijn_error();
+  Serial.println(error);
 }
