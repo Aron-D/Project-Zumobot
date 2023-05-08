@@ -13,15 +13,13 @@ Kompas::Kompas()
 {}
 
 //de constructor voor de void setup in Heading.ino
-void Kompas::init()
+void Kompas::init(LSM303::vector<int16_t> min, LSM303::vector<int16_t> max)
 {
-  Serial.begin(9600);
-  Wire.begin();
   compass.init();
   compass.enableDefault();
   //configuratie dat na calibratie accuraat opgesteld kan worden door de waarde te vervangen met de waarde van de magnetometer
-  compass.m_min = (LSM303::vector<int16_t>){-6091,  -4150,  +2725};
-  compass.m_max = (LSM303::vector<int16_t>){+1524,  +1816, +13605};
+  compass.m_min = min;
+  compass.m_max = max;
 }
 
 //de constructor voor de void loop in Heading.ino

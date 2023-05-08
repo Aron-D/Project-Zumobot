@@ -13,11 +13,13 @@
 
 
 AccelSensor::AccelSensor() { 
-  Zumo.enableDefault();
-  Wire.begin();
-  Zumo.init();
 };
 
+void AccelSensor::init()
+{
+  Zumo.enableDefault();
+  Zumo.init();
+}
 
 String AccelSensor::Accel_ReturnPosition() { // class that reads the current X,Y,Z values of the accelorometer and converts it to positions in strings.
 
@@ -54,6 +56,8 @@ String AccelSensor::Accel_ReturnPosition() { // class that reads the current X,Y
   return ("Zumo staat recht!");
 
 }
+Serial.println("Unknown Position");
+return ("Unknown Position");
 }
 
 

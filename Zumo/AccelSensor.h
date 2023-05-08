@@ -15,6 +15,7 @@
 class AccelSensor {
   public:
     AccelSensor();
+    void init();
     String Accel_ReturnPosition();
     int Accel_ReturnX();
     int Accel_ReturnY();
