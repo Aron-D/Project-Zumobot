@@ -13,22 +13,26 @@
 
 #include "LijnSensor.h"
 
-/*! Constructor die nu niets doet. */
-LijnSensor::LijnSensor() {
-
-}
-
 /*! Vertelt de Zumo dat alle vijf de lijnsensoren gebruikt moeten worden. */
 void LijnSensor::sensoren_initialiseren() {
   lijnSensoren.initFiveSensors();
 }
 
 /*! Calibratie door metingen uit te lezen van de lijnsensoren en vervolgens te bepalen wat "licht" en "donker" is. */
-void LijnSensor::sensoren_calibreren() {
-  lijnSensoren.calibrate();
+void LijnSensor::sensoren_kalibreren(const Motoren& m) 
+{  
+  for(uint16_t i = 0; i < 120; i++)
+  {
+    lijnSensoren.calibrate();
+  }
 }
 
 /*! Geeft aan hoever de Zumo van het midden van de lijn zit. */
 int LijnSensor::lijn_positie() {
   return lijnSensoren.readLine(lijnSensorWaarden);
+}
+
+/*! Geeft de afstand tot de lijn. */
+int LijnSensor::lijn_error() {
+  return lijnSensoren.readLine(lijnSensorWaarden) - 2000;
 }

@@ -43,7 +43,7 @@ String AccelSensor::Accel_ReturnPosition() { // class that reads the current X,Y
   Serial.println("Linkerzijde");
   return ("Linkerzijde");
 }
-  if (LastYValue > 16000) {
+  if (LastYValue > 15000) { //bij 16000 werkte hij niet
   Serial.println("rechterzijde");
   return ("Rechterzijde");
 }
