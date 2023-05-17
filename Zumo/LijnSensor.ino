@@ -19,12 +19,15 @@ void LijnSensor::sensoren_initialiseren() {
 }
 
 /*! Calibratie door metingen uit te lezen van de lijnsensoren en vervolgens te bepalen wat "licht" en "donker" is. */
-void LijnSensor::sensoren_kalibreren(const Motoren& m) 
-{  
+void LijnSensor::sensoren_kalibreren(Motoren& m) 
+{ 
   for(uint16_t i = 0; i < 120; i++)
   {
+    if(i < 60) { m.draaiLinks(100); }
+    if(i > 60) { m.draaiRechts(100); }
     lijnSensoren.calibrate();
   }
+  m.stop();
 }
 
 /*! Geeft aan hoever de Zumo van het midden van de lijn zit. */

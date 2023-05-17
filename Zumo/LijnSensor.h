@@ -28,7 +28,7 @@
 class LijnSensor {
   public:
     void sensoren_initialiseren();
-    void sensoren_kalibreren(const Motoren& m);
+    void sensoren_kalibreren(Motoren& m);
     int lijn_positie();
     int lijn_error();
 
