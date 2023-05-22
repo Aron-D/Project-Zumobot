@@ -3,7 +3,7 @@
   @date 26 Apr 2023
   @author Ruben van Eijken
 
-  Implementatie van de methodes in LijnSensor.h
+  Stukje code om de klasse uit LijnSensor.hpp te testen. Print de positie van de lijn ten opzichte van de Zumo naar de seriële poort.
 
   modified 26 Apr 2023
   by Ruben van Eijken
@@ -14,30 +14,28 @@
 #include "LijnSensor.h"
 
 /*! Vertelt de Zumo dat alle vijf de lijnsensoren gebruikt moeten worden. */
-void LijnSensor::initialiseren() {
+void LijnSensor::sensoren_initialiseren() {
   lijnSensoren.initFiveSensors();
 }
 
 /*! Calibratie door metingen uit te lezen van de lijnsensoren en vervolgens te bepalen wat "licht" en "donker" is. */
-void LijnSensor::kalibreren(const Motoren& motoren)
-{
+void LijnSensor::sensoren_kalibreren(Motoren& m) 
+{ 
   for(uint16_t i = 0; i < 120; i++)
   {
+    if(i < 60) { m.draaiLinks(100); }
+    if(i > 60) { m.draaiRechts(100); }
     lijnSensoren.calibrate();
   }
+  m.stop();
 }
 
 /*! Geeft aan hoever de Zumo van het midden van de lijn zit. */
-int LijnSensor::positie() {
+int LijnSensor::lijn_positie() {
   return lijnSensoren.readLine(lijnSensorWaarden);
 }
 
 /*! Geeft de afstand tot de lijn. */
-int LijnSensor::error() {
+int LijnSensor::lijn_error() {
   return lijnSensoren.readLine(lijnSensorWaarden) - 2000;
-}
-
-/*! Geeft een getal afhankelijk van de kleur van de lijn. */
-int LijnSensor::kleur() {
-
 }
