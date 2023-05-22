@@ -1,0 +1,29 @@
+Sensor 1 (Links):
+	Base: 172-180
+	Black: 1516-1520
+	Green: 388-404
+	Grijs: 546-560
+
+Sensor 2:
+	Base: 112-120
+	Black: 904-908
+	Green: 208-232
+	Grijs: 376-380
+
+Sensor 3:
+	Base: 64-88
+	Black: 516-524
+	Green: 168-176
+	Grijs: 224-232
+
+Sensor 4:
+	Base: 84-92
+	Black: 900-924
+	Green: 196-204
+	Grijs: 316-322
+
+Sensor 5 (Rechts):
+	Base: 112-120
+	Black: 1426-1432
+	Green: 240-260
+	Grijs: 608-612
