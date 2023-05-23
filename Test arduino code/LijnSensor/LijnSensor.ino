@@ -11,18 +11,37 @@
   by Ruben van Eijken
 */
 
-#include <Wire.h>
-#include "LijnSensor.hpp"
-#include <stdio.h>
+#include "LijnSensor.h"
 
-LijnSensor lijnSensor;
-
-void setup() {
-  lijnSensor.sensoren_initialiseren();
-  lijnSensor.sensoren_kalibreren();
+/*! Vertelt de Zumo dat alle vijf de lijnsensoren gebruikt moeten worden. */
+void LijnSensor::sensoren_initialiseren() {
+  lijnSensoren.initFiveSensors();
 }
 
-void loop() {
-  int error = lijnSensor.lijn_error();
-  Serial.println(error);
+/*! Calibratie door metingen uit te lezen van de lijnsensoren en vervolgens te bepalen wat "licht" en "donker" is. */
+void LijnSensor::sensoren_kalibreren(Motoren& m)
+{
+  for(uint16_t i = 0; i < 120; i++)
+  {
+    if (i > 30 && i <= 90)
+    {
+      m.draaiLinks(100);
+    }
+    else
+    {
+      m.draaiRechts(100);
+    }
+    lijnSensoren.calibrate();
+  }
+  m.stop();
+}
+
+/*! Geeft aan hoever de Zumo van het midden van de lijn zit. */
+int LijnSensor::lijn_positie() {
+  return lijnSensoren.readLine(lijnSensorWaarden);
+}
+
+/*! Geeft de afstand tot de lijn. */
+int LijnSensor::lijn_error() {
+  return lijnSensoren.readLine(lijnSensorWaarden) - 2000;
 }
