@@ -42,16 +42,26 @@ void IMU::begin() {
 void IMU::update() {
   imu.read();
 
-  // char report[120];
-  // snprintf_P(report, sizeof(report),
-  //   PSTR("G: %6d %6d %6d"),
-  //   imu.g.x, -imu.g.y, imu.g.z);
+  
   
     int yrotatie =  imu.g.y /100;
-    // int yrotatie =  -imu.g.y /-50;
-    // int zrotatie =  -imu.g.z /-5;
+    String Lastrotation;
 
-  Serial.println(yrotatie);
+    if (yrotatie < 0 && yrotatie > -7) {
+      Serial.println("Neutral Position");
 
-  delay(200);
+    }
+    if (yrotatie < -100){
+      Serial.println("Rotating Y Up!");
+      Lastrotation = ("up");
+    }
+    if (yrotatie > 100){
+      Serial.println("Rotation Y Down!");
+      Lastrotation = ("down");
+    }
+    else{
+      return false;
+    }
+
+  delay(300);
 }
