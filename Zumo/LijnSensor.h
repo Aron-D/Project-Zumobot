@@ -27,6 +27,7 @@
 /*! De klasse LijnSensor heeft als functie het initialiseren, calibreren en uitlezen van de lijnsensoren. */
 class LijnSensor {
   public:
+    LijnSensor();
     void sensoren_initialiseren();
     void sensoren_kalibreren(Motoren& m);
     int lijn_positie();

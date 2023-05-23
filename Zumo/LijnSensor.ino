@@ -13,6 +13,8 @@
 
 #include "LijnSensor.h"
 
+LijnSensor::LijnSensor() {}
+
 /*! Vertelt de Zumo dat alle vijf de lijnsensoren gebruikt moeten worden. */
 void LijnSensor::sensoren_initialiseren() {
   lijnSensoren.initFiveSensors();
@@ -25,11 +27,11 @@ void LijnSensor::sensoren_kalibreren(Motoren& m)
   {
     if (i > 30 && i <= 90)
     {
-      m.draaiLinks(200);
+      m.draaiLinks(100);
     }
     else
     {
-      m.draaiRechts(200);
+      m.draaiRechts(100);
     }
     lijnSensoren.calibrate();
   }
