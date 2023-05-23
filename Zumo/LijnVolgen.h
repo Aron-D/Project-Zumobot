@@ -9,9 +9,11 @@ class LijnVolgen {
       LijnVolgen();
       void init();
       void volg();
+      void kiesBocht();
     private:
       Motoren motoren;
-      LijnSensor lijnsensoren;
+      LijnSensor lijnsensor;
+      String volgendeBocht;
 };
 
 #endif

@@ -32,10 +32,10 @@ class LijnSensor {
     void sensoren_kalibreren(Motoren& m);
     int lijn_positie();
     int lijn_error();
+    uint16_t lijnSensorWaarden[5];
 
   private:
     Zumo32U4LineSensors lijnSensoren;
-    uint16_t lijnSensorWaarden[5];
 };
 
 #endif
