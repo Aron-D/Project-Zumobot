@@ -16,6 +16,7 @@ class Gyro
   String ReturnAngle();
 
   private:
-  String LastAngle();
-  int Yrotation();
-}
+  Zumo32U4IMU imu;
+  String Lastrotation();
+  int yrotation();
+};

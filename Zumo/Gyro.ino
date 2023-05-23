@@ -9,12 +9,12 @@
 */
 
 #include "Gyro.h"
-
+#include <Zumo32U4IMU.h>
 Gyro::Gyro() {
 
-}
+};
 
-Gyro::ReturnAngle() {
+String Gyro::ReturnAngle() {
   // reads the gyro values
   imu.read();
 
@@ -31,7 +31,7 @@ Gyro::ReturnAngle() {
     if (yrotatie < -100){
       Serial.println("Rotating Y Up!");
       Lastrotation = ("up");
-      return ("up")
+      return ("up");
     }
     if (yrotatie > 100){
       Serial.println("Rotation Y Down!");
@@ -39,6 +39,6 @@ Gyro::ReturnAngle() {
       return ("down");
     }
     else{
-      return false;
+      return ("error");
     }
 }
