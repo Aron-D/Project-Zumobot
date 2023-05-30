@@ -11,6 +11,7 @@ public:
   void rijRechts(int snelheid);
   void draaiLinks(int snelheid);
   void draaiRechts(int snelheid);
+  void setSpeeds(int, int);
 
 private:
   Zumo32U4Motors motors;

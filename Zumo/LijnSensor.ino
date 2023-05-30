@@ -23,9 +23,9 @@ void LijnSensor::sensoren_initialiseren() {
 /*! Calibratie door metingen uit te lezen van de lijnsensoren en vervolgens te bepalen wat "licht" en "donker" is. */
 void LijnSensor::sensoren_kalibreren(Motoren& m)
 {
-  for(uint16_t i = 0; i < 120; i++)
+  for(uint16_t i = 0; i < 200; i++)
   {
-    if (i > 30 && i <= 90)
+    if (i > 50 && i <= 150)
     {
       m.draaiLinks(100);
     }

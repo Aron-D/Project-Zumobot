@@ -29,3 +29,7 @@ void Motoren::draaiRechts(int snelheid)
 {
   motors.setSpeeds(snelheid, -snelheid);
 }
+
+void Motoren::setSpeeds(int sL, int sR) {
+  motors.setSpeeds(sL, sR);
+}
