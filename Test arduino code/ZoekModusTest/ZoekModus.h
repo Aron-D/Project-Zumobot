@@ -10,5 +10,5 @@ private:
 
 public:
   ZoekModus();
-  bool zoekBlokje();
+  void zoekBlokje();
 };

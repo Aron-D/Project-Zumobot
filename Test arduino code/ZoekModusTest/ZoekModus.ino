@@ -7,30 +7,15 @@ ZoekModus::ZoekModus()
   detector.setScanDiepte(5);
 }
 
-bool ZoekModus::zoekBlokje()
+void ZoekModus::zoekBlokje()
 {
+  delay(50);
+
+  motor.draaiLinks(100);
+
   detector.scan();
-  Richting objectRichting = detector.objectRichting();
-  
-  switch(objectRichting)
+  if(detector.objectRichting() == Richting::Midden)
   {
-  case Richting::Geen:
-    motor.draaiLinks(100);
-    break;
-  
-  case Richting::Midden:
-    motor.rechtdoor(100);
-    break;
-
-  case Richting::Links:
-    motor.rijLinks(100);
-    break;
-
-  case Richting::Rechts:
-    motor.rijRechts(100);
-    break;
-
-  default:
-    break;
+    while(true) { motor.rechtdoor(400); }
   }
 }
