@@ -71,5 +71,18 @@ void LijnVolgen::volg() {
       //volgExample();
     }
 }
+//in testing phase excuse the stoopid code
+void LijnVolgen::kiesBocht() {
 
-void LijnVolgen::kiesBocht() {}
+for (uint8_t i = 0; i < 5; i++) {
+  if (i = 0)
+    if (lijnSensorWaarden[i] < 570 && lijnSensorWaarden[i] > 540) {
+      volgendebocht = "links";
+      serial.println(volgendebocht)
+    }
+ if (i = 4)
+    if (lijnSensorWaarden[i] < 620 && lijnSensorWaarden[i] > 600) {
+      volgendebocht = "rechts";
+      serial.println(volgendebocht)
+    }
+}
