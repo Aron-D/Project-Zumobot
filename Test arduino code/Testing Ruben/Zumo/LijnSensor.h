@@ -32,6 +32,7 @@ public:
   void initialiseren();
   void kalibreren(Motoren& m);
   int error();
+  int lees_sensor(int);
   uint16_t sensorWaarden[5];
 
 private:

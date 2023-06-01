@@ -12,12 +12,12 @@ void Motoren::stop()
 
 void Motoren::rijRechts(int snelheid)
 {
-  motors.setSpeeds(0,snelheid);
+  motors.setSpeeds(snelheid, 0);
 }
 
 void Motoren::rijLinks(int snelheid)
 {
-  motors.setSpeeds(snelheid,0);
+  motors.setSpeeds(0, snelheid);
 }
 
 void Motoren::draaiLinks(int snelheid)

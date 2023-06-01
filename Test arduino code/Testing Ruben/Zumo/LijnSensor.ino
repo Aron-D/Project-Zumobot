@@ -44,3 +44,8 @@ int LijnSensor::error()
 {
   return lijnSensoren.readLine(sensorWaarden) - 2000;
 }
+
+int LijnSensor::lees_sensor(int i)
+{
+  return sensorWaarden[i];
+}
