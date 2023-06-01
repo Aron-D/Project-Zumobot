@@ -1,6 +1,8 @@
-#pragma once
 #include <Zumo32U4Motors.h>
 #include <Zumo32U4Encoders.h>
+
+#ifndef MOTOREN_H
+#define MOTOREN_H
 
 class Motoren
 {
@@ -15,5 +17,6 @@ public:
 
 private:
   Zumo32U4Motors motors;
-  //Zumo32U4Encoders encoders;
 };
+
+#endif

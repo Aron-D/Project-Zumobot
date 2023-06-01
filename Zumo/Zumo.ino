@@ -1,8 +1,6 @@
 #include <Zumo32U4.h>
 #include <Wire.h>
 
-#include "LijnSensor.h"
-#include "Motoren.h"
 #include "LijnVolgen.h"
 
 LijnVolgen lijnvolgen;
@@ -17,5 +15,5 @@ void setup()
 
 void loop() 
 {
-  lijnvolgen.volg();
+  lijnvolgen.start();
 }

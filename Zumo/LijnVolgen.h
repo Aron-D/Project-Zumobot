@@ -4,19 +4,19 @@
 #ifndef LIJNVOLGEN_H
 #define LIJNVOLGEN_H
 
-class LijnVolgen {
+class LijnVolgen
+{
     public:
       LijnVolgen();
       void init();
-      void volg();
-      void volgExample();
+      void start();
       void kiesBocht();
     private:
       Motoren motoren;
       LijnSensor lijnsensor;
-      String volgendeBocht;
-      const int16_t maxSpeed = 400;
-      int lastError = 0;
+      int16_t lastError;
+      int16_t error;
+      int16_t maxSpeed;
 };
 
 #endif

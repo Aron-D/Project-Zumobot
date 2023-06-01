@@ -16,34 +16,31 @@
 LijnSensor::LijnSensor() {}
 
 /*! Vertelt de Zumo dat alle vijf de lijnsensoren gebruikt moeten worden. */
-void LijnSensor::sensoren_initialiseren() {
+void LijnSensor::initialiseren()
+{
   lijnSensoren.initFiveSensors();
 }
 
 /*! Calibratie door metingen uit te lezen van de lijnsensoren en vervolgens te bepalen wat "licht" en "donker" is. */
-void LijnSensor::sensoren_kalibreren(Motoren& m)
+void LijnSensor::kalibreren(Motoren& m)
 {
-  for(uint16_t i = 0; i < 200; i++)
+  for(uint16_t i = 0; i < 120; i++)
   {
-    if (i > 50 && i <= 150)
+    if (i > 30 && i <= 90)
     {
-      m.draaiLinks(100);
+      m.draaiLinks(200);
     }
     else
     {
-      m.draaiRechts(100);
+      m.draaiRechts(200);
     }
     lijnSensoren.calibrate();
   }
   m.stop();
 }
 
-/*! Geeft aan hoever de Zumo van het midden van de lijn zit. */
-int LijnSensor::lijn_positie() {
-  return lijnSensoren.readLine(lijnSensorWaarden);
-}
-
 /*! Geeft de afstand tot de lijn. */
-int LijnSensor::lijn_error() {
-  return lijnSensoren.readLine(lijnSensorWaarden) - 2000;
+int LijnSensor::error()
+{
+  return lijnSensoren.readLine(sensorWaarden) - 2000;
 }

@@ -25,17 +25,17 @@
 #include <Zumo32U4LineSensors.h>
 
 /*! De klasse LijnSensor heeft als functie het initialiseren, calibreren en uitlezen van de lijnsensoren. */
-class LijnSensor {
-  public:
-    LijnSensor();
-    void sensoren_initialiseren();
-    void sensoren_kalibreren(Motoren& m);
-    int lijn_positie();
-    int lijn_error();
-    uint16_t lijnSensorWaarden[5];
+class LijnSensor
+{
+public:
+  LijnSensor();
+  void initialiseren();
+  void kalibreren(Motoren& m);
+  int error();
+  uint16_t sensorWaarden[5];
 
-  private:
-    Zumo32U4LineSensors lijnSensoren;
+private:
+  Zumo32U4LineSensors lijnSensoren;
 };
 
 #endif
