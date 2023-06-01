@@ -1,6 +1,7 @@
 #include "ZoekModus.h"
 
 ZoekModus zoekmodus;
+bool running = true;
 
 void setup() 
 {
@@ -10,6 +11,15 @@ void setup()
 
 void loop() 
 {
-  // put your main code here, to run repeatedly:
-  zoekmodus.zoekBlokje();
+  while(running)
+  {
+    //zoek het blokje en rij er naartoe
+    zoekmodus.zoekBlokje();
+
+    //als het blokje uit de cirkel is stopt het programma
+    if(zoekmodus.blokjeVerwijderd())
+    {
+      running = false;
+    }
+  }
 }
