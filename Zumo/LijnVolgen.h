@@ -17,6 +17,7 @@ class LijnVolgen
       int16_t lastError;
       int16_t error;
       int16_t maxSpeed;
+      String volgendebocht;
 };
 
 #endif
