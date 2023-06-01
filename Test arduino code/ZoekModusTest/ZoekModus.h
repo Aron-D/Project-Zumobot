@@ -8,7 +8,10 @@ private:
   Motoren motor;
   ObjectDetector detector;
 
+  bool blokje_verwijderd;
+
 public:
   ZoekModus();
   void zoekBlokje();
+  bool blokjeVerwijderd();
 };
