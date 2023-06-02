@@ -4,19 +4,19 @@ LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(300) {}
 
 void LijnVolgen::init()
 {
-  lijnsensor.initialiseren();
-  lijnsensor.kalibreren(motoren);
+  lijnSensor.initialiseren();
+  lijnSensor.kalibreren(motoren);
 }
 
-void LijnVolgen::start()
+void LijnVolgen::standaardModus()
 {
-  error = lijnsensor.error();
-  if (lijnsensor.lees_sensor(0) > 800)
+  error = lijnSensor.error();
+  if (lijnSensor.lees_sensor(0) > 800)
   {
     motoren.rijLinks(300);
     delay(400);
   }
-  else if (lijnsensor.lees_sensor(4) > 800)
+  else if (lijnSensor.lees_sensor(4) > 800)
   {
     motoren.rijRechts(300);
     delay(400);
