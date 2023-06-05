@@ -1,19 +1,17 @@
-#include <Zumo32U4.h>
-#include <Wire.h>
 #include "LijnVolgen.h"
+// Gebruik voor seriële communicatie: #include <Wire.h>
 
-LijnVolgen lijnvolgen;
+LijnVolgen lijnVolgen;
 
 void setup() 
 {
-  Serial.begin(9600);
-  Wire.begin();
+  // Gebruik voor seriële communicatie: Serial.begin(9600);
+  // Wire.begin();
   delay(1000);
-  lijnvolgen.init();
+  lijnVolgen.init();
 }
 
 void loop() 
 {
-lijnvolgen.start();
-lijnvolgen.kiesBocht();
+  lijnVolgen.standaardModus();
 }
