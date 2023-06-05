@@ -1,14 +1,8 @@
 /*!
   @file LijnSensor.ino
-  @date 26 Apr 2023
   @author Ruben van Eijken
 
-  Stukje code om de klasse uit LijnSensor.hpp te testen. Print de positie van de lijn ten opzichte van de Zumo naar de seriële poort.
-
-  modified 26 Apr 2023
-  by Ruben van Eijken
-  modified 2 May 2023
-  by Ruben van Eijken
+  Implementatie van de klasse "LijnSensor".
 */
 
 #include "LijnSensor.h"
@@ -43,4 +37,10 @@ void LijnSensor::kalibreren(Motoren& m)
 int LijnSensor::error()
 {
   return lijnSensoren.readLine(sensorWaarden) - 2000;
+}
+
+/*! Leest de individuele lijnsensoren uit. */
+int LijnSensor::lees_sensor(int i)
+{
+  return sensorWaarden[i];
 }

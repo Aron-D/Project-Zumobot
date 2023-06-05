@@ -1,35 +1,29 @@
 #include "LijnVolgen.h"
 
-
 LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(300) {}
 
 void LijnVolgen::init()
 {
-  lijnsensor.initialiseren();
-  lijnsensor.kalibreren(motoren);
+  lijnSensor.initialiseren();
+  lijnSensor.kalibreren(motoren);
 }
 
-void LijnVolgen::start()
+void LijnVolgen::standaardModus()
 {
-  //kijk of er een bocht gemaakt moet worden
-  if (lijnsensor.sensorWaarden[0] > 900 || lijnsensor.sensorWaarden[4] > 900) 
+  error = lijnSensor.error();
+  if (lijnSensor.lees_sensor(0) > 800)
   {
-    //kijk of we naar links of rechts moeten
-    if (volgendebocht == "links") 
-    {
-      motoren.rijRechts(100);
-      volgendebocht = "niks";
-    }
-    if (volgendebocht == "rechts")
-    {
-      motoren.rijLinks(100);
-      volgendebocht = "niks";
-    }
+    motoren.rijLinks(300);
+    delay(400);
   }
-  else 
+  else if (lijnSensor.lees_sensor(4) > 800)
   {
-    error = lijnsensor.error();
-    int16_t snelheidsVerschil = error / 4 + 6 * (error - lastError);
+    motoren.rijRechts(300);
+    delay(400);
+  }
+  else
+  {
+    int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
     lastError = error;
 
     int16_t snelheidLinks = maxSpeed + snelheidsVerschil;
@@ -40,22 +34,4 @@ void LijnVolgen::start()
 
     motoren.setSpeeds(snelheidLinks, snelheidRechts);
   }
-}  
-
-void LijnVolgen::kiesBocht() {
-  if (lijnsensor.sensorWaarden[0] < 900 && lijnsensor.sensorWaarden[0] > 220) 
-  {
-    volgendebocht = "links";
-    Serial.println(volgendebocht);
-  }
-  else if (lijnsensor.sensorWaarden[4] < 1000 && lijnsensor.sensorWaarden[4] > 200) 
-  {
-    volgendebocht = "rechts";
-    Serial.println(volgendebocht);
-  } 
-  else
-  {
-
-  }
 }
-
