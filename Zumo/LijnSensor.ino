@@ -42,5 +42,6 @@ int LijnSensor::error()
 /*! Leest de individuele lijnsensoren uit. */
 int LijnSensor::lees_sensor(int i)
 {
+  lijnSensoren.readLine(sensorWaarden);
   return sensorWaarden[i];
 }

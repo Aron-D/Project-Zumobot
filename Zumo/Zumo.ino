@@ -13,5 +13,9 @@ void setup()
 
 void loop() 
 {
+  if (lijnVolgen.volgendeBocht == "")
+  {
+    lijnVolgen.bocht_registratie();
+  }
   lijnVolgen.standaardModus();
 }

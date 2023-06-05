@@ -10,6 +10,8 @@ public:
   LijnVolgen();
   void init();
   void standaardModus();
+  void bocht_registratie();
+  String volgendeBocht;
 
 private:
   Motoren motoren;
