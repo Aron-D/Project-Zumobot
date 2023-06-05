@@ -38,13 +38,14 @@ void Motoren::setSpeeds(int sL, int sR)
 
 void Motoren::draai90links()
 {
-  const int draaiSlagen = 1200; 
+  const int draaiSlagen =  -1000; 
   
-  encoders.getCountsAndResetM1(); 
+  encoders.getCountsAndResetLeft(); 
 
-  while (encoders.getCountsM1() < draaiSlagen)
+  while (encoders.getCountsLeft() > draaiSlagen)
   {
     motors.setSpeeds(-200, 200);
+    Serial.println(encoders.getCountsLeft());
   }
 
   motors.setSpeeds(0, 0); 
@@ -52,13 +53,14 @@ void Motoren::draai90links()
 
 void Motoren::draai90rechts()
 {
-  const int draaiSlagen = 1200;
+  const int draaiSlagen = -1000;
   
-  encoders.getCountsAndResetM2();
+  encoders.getCountsAndResetRight();
 
-  while (encoders.getCountsM2() < draaiSlagen)
+  while (encoders.getCountsRight() > draaiSlagen)
   {
     motors.setSpeeds(200, -200);
+    
   }
 
   motors.setSpeeds(0, 0); 

@@ -1,4 +1,5 @@
 #include "LijnVolgen.h"
+#include "Motoren.h"
 
 
 LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(300) {}
@@ -17,12 +18,12 @@ void LijnVolgen::start()
     //kijk of we naar links of rechts moeten
     if (volgendebocht == "links") 
     {
-      motoren.rijRechts(100);
+      motoren.draai90links();
       volgendebocht = "niks";
     }
     if (volgendebocht == "rechts")
     {
-      motoren.rijLinks(100);
+      motoren.draai90rechts();
       volgendebocht = "niks";
     }
   }
