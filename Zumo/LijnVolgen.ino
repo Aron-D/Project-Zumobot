@@ -54,9 +54,20 @@ void LijnVolgen::standaardModus()
 {
   error = lijnSensor.error();
 
+  int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
+  lastError = error;
+
+  int16_t snelheidLinks = maxSpeed + snelheidsVerschil;
+  int16_t snelheidRechts = maxSpeed - snelheidsVerschil;
+
+  snelheidLinks = constrain(snelheidLinks, -maxSpeed, maxSpeed);
+  snelheidRechts = constrain(snelheidRechts, -maxSpeed, maxSpeed);
+
+  motoren.setSpeeds(snelheidLinks, snelheidRechts);
+
   if (volgendeBocht != "")
   {
-    if ((lijnSensor.lees_kleur(0) == "zwart" && lijnSensor.lees_kleur(1) == "zwart") || (lijnSensor.lees_kleur(4) == "zwart" && lijnSensor.lees_kleur(3) == "zwart")
+    if ((lijnSensor.lees_kleur(0) == "zwart" && lijnSensor.lees_kleur(1) == "zwart") || (lijnSensor.lees_kleur(4) == "zwart" && lijnSensor.lees_kleur(3) == "zwart"))
     {
       if (volgendeBocht == "links")
       {
@@ -70,15 +81,4 @@ void LijnVolgen::standaardModus()
       }
     }
   }
-
-  int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
-  lastError = error;
-
-  int16_t snelheidLinks = maxSpeed + snelheidsVerschil;
-  int16_t snelheidRechts = maxSpeed - snelheidsVerschil;
-
-  snelheidLinks = constrain(snelheidLinks, -maxSpeed, maxSpeed);
-  snelheidRechts = constrain(snelheidRechts, -maxSpeed, maxSpeed);
-
-  motoren.setSpeeds(snelheidLinks, snelheidRechts);
 }

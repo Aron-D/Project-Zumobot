@@ -6,6 +6,7 @@ LijnVolgen lijnVolgen;;
 
 void setup() 
 {
+  delay(1000);
   lijnVolgen.init();
 }
 
