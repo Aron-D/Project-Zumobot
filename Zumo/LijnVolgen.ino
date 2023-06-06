@@ -8,7 +8,7 @@ void LijnVolgen::init()
   lijnSensor.kalibreren(motoren);
 }
 
-void LijnVolgen::bocht_registratie()
+/* void LijnVolgen::bocht_registratie()
 {
   int grijsCounterLinks = 0;
   int grijsCounterRechts = 0;
@@ -28,25 +28,49 @@ void LijnVolgen::bocht_registratie()
   {
     volgendeBocht = "rechts";
   }
+} */
+
+void LijnVolgen::bocht_registratie()
+{
+  if (volgendeBocht == "")
+  {
+    if ((lijnSensor.lees_kleur(0) == "grijs" && lijnSensor.lees_kleur(1) == "grijs") || (lijnSensor.lees_kleur(4) == "grijs" && lijnSensor.lees_kleur(3) == "grijs"))
+    {
+      motoren.stap();
+
+      if (lijnSensor.lees_kleur(0) == "grijs" && lijnSensor.lees_kleur(1) == "grijs")
+      {
+        volgendeBocht = "links";
+      }
+      else if (lijnSensor.lees_kleur(4) == "grijs" && lijnSensor.lees_kleur(3) == "grijs")
+      {
+        volgendeBocht = "rechts";
+      }
+    }
+  }
 }
 
 void LijnVolgen::standaardModus()
 {
-  Serial.println(volgendeBocht);
-  if (lijnSensor.lees_sensor(0) > 1100 || lijnSensor.lees_sensor(4) > 1100)
+  error = lijnSensor.error();
+
+  if (volgendeBocht != "")
   {
-    if (volgendeBocht == "links")
+    if ((lijnSensor.lees_kleur(0) == "zwart" && lijnSensor.lees_kleur(1) == "zwart") || (lijnSensor.lees_kleur(4) == "zwart" && lijnSensor.lees_kleur(3) == "zwart")
     {
-      motoren.draai90links();
-      volgendeBocht = "";
-    }
-    else if (volgendeBocht == "rechts")
-    {
-      motoren.draai90rechts();
-      volgendeBocht = "";
+      if (volgendeBocht == "links")
+      {
+        motoren.draai90links();
+        volgendeBocht = "";
+      }
+      else if (volgendeBocht == "rechts")
+      {
+        motoren.draai90rechts();
+        volgendeBocht = "";
+      }
     }
   }
-  error = lijnSensor.error();
+
   int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
   lastError = error;
 
