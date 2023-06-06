@@ -68,7 +68,7 @@ void Motoren::draai90rechts()
 
 void Motoren::stap()
 {
-  const int targetCount = 600;  // Aantal pulsen per volledige stap (360 graden)
+  const int targetCount = 150;  // Aantal pulsen per volledige stap (360 graden)
   int leftCount = encoders.getCountsLeft();
   int rightCount = encoders.getCountsRight();
 

@@ -34,18 +34,21 @@ void LijnVolgen::bocht_registratie()
 {
   if (volgendeBocht == "")
   {
-    if ((lijnSensor.lees_kleur(0) == "grijs" && lijnSensor.lees_kleur(1) == "grijs") || (lijnSensor.lees_kleur(4) == "grijs" && lijnSensor.lees_kleur(3) == "grijs"))
+    if ((lijnSensor.lees_kleur(0) == "grijs" /*&& lijnSensor.lees_kleur(1) == "grijs"*/) || (lijnSensor.lees_kleur(4) == "grijs" /*&& lijnSensor.lees_kleur(3) == "grijs"*/))
     {
-      motoren.stap();
+      //motoren.stap();
+      //delay(500);
 
-      if (lijnSensor.lees_kleur(0) == "grijs" && lijnSensor.lees_kleur(1) == "grijs")
+      if (lijnSensor.lees_kleur(0) == "grijs"/* && lijnSensor.lees_kleur(1) == "grijs"*/)
       {
         volgendeBocht = "links";
       }
-      else if (lijnSensor.lees_kleur(4) == "grijs" && lijnSensor.lees_kleur(3) == "grijs")
+      else if (lijnSensor.lees_kleur(4) == "grijs"/* && lijnSensor.lees_kleur(3) == "grijs"*/)
       {
         volgendeBocht = "rechts";
       }
+      
+      Serial.println(volgendeBocht);
     }
   }
 }
@@ -53,7 +56,7 @@ void LijnVolgen::bocht_registratie()
 void LijnVolgen::standaardModus()
 {
   error = lijnSensor.error();
-
+  
   int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
   lastError = error;
 
@@ -65,20 +68,17 @@ void LijnVolgen::standaardModus()
 
   motoren.setSpeeds(snelheidLinks, snelheidRechts);
 
-  if (volgendeBocht != "")
+  if ((lijnSensor.lees_sensor(0) > 1500) || (lijnSensor.lees_sensor(4) > 1500))
   {
-    if ((lijnSensor.lees_kleur(0) == "zwart" && lijnSensor.lees_kleur(1) == "zwart") || (lijnSensor.lees_kleur(4) == "zwart" && lijnSensor.lees_kleur(3) == "zwart"))
+    if (volgendeBocht == "links")
     {
-      if (volgendeBocht == "links")
-      {
-        motoren.draai90links();
-        volgendeBocht = "";
-      }
-      else if (volgendeBocht == "rechts")
-      {
-        motoren.draai90rechts();
-        volgendeBocht = "";
-      }
+      motoren.draai90links();
+      volgendeBocht = "";
+    }
+    else if (volgendeBocht == "rechts")
+    {
+      motoren.draai90rechts();
+      volgendeBocht = "";
     }
   }
 }

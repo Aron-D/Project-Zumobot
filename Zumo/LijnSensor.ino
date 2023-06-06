@@ -81,9 +81,9 @@ void LijnSensor::kalibreer_kleuren(int& min, int& max, Motoren& m)
   for(uint16_t i = 0; i < 120; i++)
   {
     lijnSensoren.read(kleursensors);
-    if(kleursensors[2] < min) { min = kleursensors[2]; }
-    if(kleursensors[2] > max) { max = kleursensors[2]; }
-    Serial.println("min: " + String(min) + ", max: " + String(max));
+    if(kleursensors[0] < min) { min = kleursensors[0]; }
+    if(kleursensors[0] > max) { max = kleursensors[0]; }
+    Serial.println("min: " + String(min) + ", max: " + String(max) + " --- " + String(kleursensors[0]));
     delay(10);
   }
 }
@@ -92,23 +92,24 @@ String LijnSensor::lees_kleur(int sensor_nummer)
 {
   uint16_t kleursensors[5];
   lijnSensoren.read(kleursensors);
+  int marge = 50;
 
-  if(kleursensors[sensor_nummer] > bruinMinimumWaarde && kleursensors[sensor_nummer] < bruinMaximumWaarde)
+  if(kleursensors[sensor_nummer] > bruinMinimumWaarde-marge && kleursensors[sensor_nummer] < bruinMaximumWaarde+marge)
   {
     return "bruin";
   }
 
-  if(kleursensors[sensor_nummer] > groenMinimumWaarde && kleursensors[sensor_nummer] < groenMaximumWaarde)
+  if(kleursensors[sensor_nummer] > groenMinimumWaarde-marge && kleursensors[sensor_nummer] < groenMaximumWaarde+marge)
   {
     return "groen";
   }
 
-  if(kleursensors[sensor_nummer] > grijsMinimumWaarde && kleursensors[sensor_nummer] < grijsMaximumWaarde)
+  if(kleursensors[sensor_nummer] > grijsMinimumWaarde-marge && kleursensors[sensor_nummer] < grijsMaximumWaarde+marge)
   {
     return "grijs";
   }
   
-  if(kleursensors[sensor_nummer] > zwartMinimumWaarde && kleursensors[sensor_nummer] < zwartMaximumWaarde)
+  if(kleursensors[sensor_nummer] > zwartMinimumWaarde-marge && kleursensors[sensor_nummer] < zwartMaximumWaarde+marge)
   {
     return "zwart";
   }
@@ -124,6 +125,6 @@ int LijnSensor::error()
 /*! Leest de individuele lijnsensoren uit. */
 int LijnSensor::lees_sensor(int i)
 {
-  lijnSensoren.readLine(sensorWaarden);
+  lijnSensoren.read(sensorWaarden);
   return sensorWaarden[i];
 }
