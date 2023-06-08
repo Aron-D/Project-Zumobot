@@ -1,17 +1,27 @@
 #include "LijnVolgen.h"
 
+
 LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(200), volgendeBocht("") {}
 
 void LijnVolgen::init()
 {
-  // lijnSensor.initialiseren();
-  // lijnSensor.kalibreren(motoren);
+  lijnSensor.initialiseren();
+  lijnSensor.kalibreren(motoren);
 }
 
-void LijnVolgen::stop_registratie() {
-  while(gyro.ReturnAngle() == "down")
+void LijnVolgen::stop_registratie() 
+{
+  motoren.rechtdoor(200);
+
+  if (lijnSensor.lees_kleur(0) == "grijs" && lijnSensor.lees_kleur(4) == "grijs")
   {
     motoren.stop();
+    delay(5000);
+    Serial.println("poep");
+  }
+  else
+  {
+    Serial.println("niks te zien");
   }
 }
 
@@ -22,7 +32,7 @@ void LijnVolgen::bocht_registratie()
 //   while (lijnSensor.lees_sensor(0) > 200 && lijnSensor.lees_sensor(0) < 800)
   // {
 //     grijsCounterLinks += 1;
-  }
+//  }
 //   if (grijsCounterLinks > 6)
 //   {
 //     volgendeBocht = "links";
@@ -35,7 +45,7 @@ void LijnVolgen::bocht_registratie()
 //   {
 //     volgendeBocht = "rechts";
 //   }
-// }
+}
 
 void LijnVolgen::standaardModus()
 {
@@ -46,7 +56,7 @@ void LijnVolgen::standaardModus()
 //     {
 //       motoren.draai90links();
 //       volgendeBocht = "";
-    }
+//    }
 //     else if (volgendeBocht == "rechts")
 //     {
 //       motoren.draai90rechts();
@@ -64,4 +74,4 @@ void LijnVolgen::standaardModus()
 //   snelheidRechts = constrain(snelheidRechts, -maxSpeed, maxSpeed);
 
 //   motoren.setSpeeds(snelheidLinks, snelheidRechts);
-// }
+}

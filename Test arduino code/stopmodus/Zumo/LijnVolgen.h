@@ -1,9 +1,10 @@
-#include "Motoren.h"
-#include "LijnSensor.h"
-#include "gyro.h"
-
 #ifndef LIJNVOLGEN_H
 #define LIJNVOLGEN_H
+
+#include "Motoren.h"
+#include "LijnSensor.h"
+// #include "gyro.h"
+
 
 class LijnVolgen
 {
@@ -18,7 +19,7 @@ public:
 private:
   Motoren motoren;
   LijnSensor lijnSensor;
-  Gyro gyro;
+  // Gyro gyro;
   int16_t lastError;
   int16_t error;
   int16_t maxSpeed;

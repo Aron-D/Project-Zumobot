@@ -3,14 +3,14 @@
 // Gebruik voor seriële communicatie: #include <Wire.h>
 
 LijnVolgen lijnVolgen;
-Gyro Gyro;
+// Gyro Gyro;
 
 void setup() 
 {
   // Gebruik voor seriële communicatie: Serial.begin(9600);
   // Wire.begin();
   delay(1000);
-  Gyro.init();
+  // Gyro.init();
   lijnVolgen.init();
 }
 
@@ -20,7 +20,7 @@ void loop()
   // {
   //   lijnVolgen.bocht_registratie();
   // }
-  Gyro.ReturnAngle();
+  // Gyro.ReturnAngle();
   lijnVolgen.stop_registratie();
-  lijnVolgen.standaardModus();
+  // lijnVolgen.standaardModus();
 }

@@ -1,4 +1,3 @@
-#include "WString.h"
 /*!
   @mainpage LijnSensor Zumo
 
