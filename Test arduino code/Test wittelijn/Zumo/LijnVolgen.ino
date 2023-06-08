@@ -1,4 +1,6 @@
 #include "LijnVolgen.h"
+#include "LijnSensor.h"
+#include "Motoren.h"
 
 LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(200), volgendeBocht("") {}
 
@@ -55,9 +57,10 @@ void LijnVolgen::bocht_registratie()
 
 void LijnVolgen::standaardModus()
 {
-
-  error = lijnSensor.error();
   
+  error = lijnSensor.error();
+
+  if (lijnSensor.error() > -2000 && lijnSensor.error() < 2000) {
   int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
   lastError = error;
 
@@ -81,6 +84,11 @@ void LijnVolgen::standaardModus()
       motoren.draai90rechts();
       volgendeBocht = "";
     }
+    
+  }
+  }
+  else {
+    motoren.rechtdoor(200);
     
 
   }
