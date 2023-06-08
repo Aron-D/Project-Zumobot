@@ -25,37 +25,37 @@ void LijnSensor::kalibreren(Motoren& m)
   //kalibreer kleur detectie zwart
   Serial.println("Zet de zumo op een zwarte lijn");
   delay(3000);
-  buzzer.playFrequency(220, 200, 15); //begin kalibreren
+  buzzer.playFrequency(220, 100, 15); //begin kalibreren
   kalibreer_kleuren(zwartMaximumWaarde, zwartMaximumWaarde, m);
-  buzzer.playFrequency(440, 200, 15); //eind kalibreren
+  buzzer.playFrequency(440, 100, 15); //eind kalibreren
   
   //kalibreer kleur detectie grijs
   Serial.println("Zet de zumo op een grijze lijn");
   delay(3000);
-  buzzer.playFrequency(220, 200, 15); //begin kalibreren
+  buzzer.playFrequency(220, 100, 15); //begin kalibreren
   kalibreer_kleuren(grijsMinimumWaarde, grijsMaximumWaarde, m);
-  buzzer.playFrequency(440, 200, 15); //eind kalibreren
+  buzzer.playFrequency(440, 100, 15); //eind kalibreren
   
   //kalibreer kleur detectie bruin
   Serial.println("Zet de zumo op een bruine lijn");
   delay(3000);
-  buzzer.playFrequency(220, 200, 15); //begin kalibreren
+  buzzer.playFrequency(220, 100, 15); //begin kalibreren
   kalibreer_kleuren(bruinMinimumWaarde, bruinMaximumWaarde, m);
-  buzzer.playFrequency(440, 200, 15); //eind kalibreren
+  buzzer.playFrequency(440, 100, 15); //eind kalibreren
 
   //kalibreer kleur detectie groen
   Serial.println("Zet de zumo op een groene lijn");
   delay(3000);
-  buzzer.playFrequency(220, 200, 15); //begin kalibreren
+  buzzer.playFrequency(220, 100, 15); //begin kalibreren
   kalibreer_kleuren(groenMinimumWaarde, groenMaximumWaarde, m);
-  buzzer.playFrequency(440, 200, 15); //eind kalibreren
+  buzzer.playFrequency(440, 100, 15); //eind kalibreren
 
 
   //kalibreer kleur detectie zwart
   Serial.println("\nLijn kalibratie");
   Serial.println("Zet de zumo op een zwarte lijn");
   delay(3000);
-  buzzer.playFrequency(220, 200, 15);
+  buzzer.playFrequency(220, 100, 15);
   for(uint16_t i = 0; i < 120; i++)
   {
     if (i > 30 && i <= 90)
@@ -69,7 +69,7 @@ void LijnSensor::kalibreren(Motoren& m)
     lijnSensoren.calibrate();
   }
   m.stop();
-  buzzer.playFrequency(440, 200, 15);
+  buzzer.playFrequency(440, 100, 15);
 }
 
 void LijnSensor::kalibreer_kleuren(int& min, int& max, Motoren& m)
@@ -81,9 +81,9 @@ void LijnSensor::kalibreer_kleuren(int& min, int& max, Motoren& m)
   for(uint16_t i = 0; i < 120; i++)
   {
     lijnSensoren.read(kleursensors);
-    if(kleursensors[2] < min) { min = kleursensors[2]; }
-    if(kleursensors[2] > max) { max = kleursensors[2]; }
-    Serial.println("min: " + String(min) + ", max: " + String(max));
+    if(kleursensors[0] < min) { min = kleursensors[0]; }
+    if(kleursensors[0] > max) { max = kleursensors[0]; }
+    Serial.println("min: " + String(min) + ", max: " + String(max) + " --- " + String(kleursensors[0]));
     delay(10);
   }
 }
@@ -92,23 +92,24 @@ String LijnSensor::lees_kleur(int sensor_nummer)
 {
   uint16_t kleursensors[5];
   lijnSensoren.read(kleursensors);
+  int marge = 50;
 
-  if(kleursensors[sensor_nummer] > bruinMinimumWaarde && kleursensors[sensor_nummer] < bruinMaximumWaarde)
+  if(kleursensors[sensor_nummer] > bruinMinimumWaarde-marge && kleursensors[sensor_nummer] < bruinMaximumWaarde+marge)
   {
     return "bruin";
   }
 
-  if(kleursensors[sensor_nummer] > groenMinimumWaarde && kleursensors[sensor_nummer] < groenMaximumWaarde)
+  if(kleursensors[sensor_nummer] > groenMinimumWaarde-marge && kleursensors[sensor_nummer] < groenMaximumWaarde+marge)
   {
     return "groen";
   }
 
-  if(kleursensors[sensor_nummer] > grijsMinimumWaarde && kleursensors[sensor_nummer] < grijsMaximumWaarde)
+  if(kleursensors[sensor_nummer] > grijsMinimumWaarde-marge && kleursensors[sensor_nummer] < grijsMaximumWaarde+marge)
   {
     return "grijs";
   }
   
-  if(kleursensors[sensor_nummer] > zwartMinimumWaarde && kleursensors[sensor_nummer] < zwartMaximumWaarde)
+  if(kleursensors[sensor_nummer] > zwartMinimumWaarde-marge && kleursensors[sensor_nummer] < zwartMaximumWaarde+marge)
   {
     return "zwart";
   }
@@ -124,6 +125,6 @@ int LijnSensor::error()
 /*! Leest de individuele lijnsensoren uit. */
 int LijnSensor::lees_sensor(int i)
 {
-  lijnSensoren.readLine(sensorWaarden);
+  lijnSensoren.read(sensorWaarden);
   return sensorWaarden[i];
 }

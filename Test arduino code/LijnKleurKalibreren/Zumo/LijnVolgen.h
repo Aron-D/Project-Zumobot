@@ -1,3 +1,4 @@
+#include "WString.h"
 #include "Motoren.h"
 #include "LijnSensor.h"
 
@@ -19,6 +20,9 @@ private:
   int16_t lastError;
   int16_t error;
   int16_t maxSpeed;
+
+  int grijsTellerLinks;
+  int grijsTellerRechts;
 };
 
 #endif
