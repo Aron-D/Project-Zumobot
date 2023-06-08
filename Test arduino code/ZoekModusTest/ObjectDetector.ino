@@ -3,7 +3,7 @@
 ObjectDetector::ObjectDetector()
 {
   m_proximitySensor.initThreeSensors();
-  m_scanDiepte = 6;
+  m_scanDiepte = 5;
 }
 
 void ObjectDetector::setScanDiepte(int d)

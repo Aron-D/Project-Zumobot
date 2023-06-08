@@ -5,8 +5,10 @@ bool running = true;
 
 void setup() 
 {
+  
   // put your setup code here, to run once:
   //...
+  zoekmodus.startZoekMode();
 }
 
 void loop() 
@@ -17,9 +19,9 @@ void loop()
     zoekmodus.zoekBlokje();
 
     //als het blokje uit de cirkel is stopt het programma
-    if(zoekmodus.blokjeVerwijderd())
-    {
-      running = false;
-    }
+   if(zoekmodus.blokjeVerwijderd())
+   {
+     running = false;
+   }
   }
 }

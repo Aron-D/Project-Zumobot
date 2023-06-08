@@ -11,23 +11,44 @@ ZoekModus::ZoekModus()
 
 void ZoekModus::zoekBlokje()
 {
-  motor.draaiLinks(100);
-
   detector.scan();
-  if(detector.objectRichting() == Richting::Midden)
+  Richting richting = detector.objectRichting();
+
+  switch (richting) 
   {
-    //rij vooruitvoor 5 seconden
-    motor.rechtdoor(400);
-    delay(5000);
-    motor.stop();
-    blokje_verwijderd = true;
-    return;
+  case Richting::Midden:
+    motor.rechtdoor(300);
+    break;
+  case Richting::Links:
+    motor.rijRechts(250);
+    delay(100);
+    break;
+  case Richting::Rechts:
+    motor.rijLinks(250);
+    delay(100);
+    break;
+  case Richting::Geen:
+    motor.draaiLinks(150);
+    break;
   }
 
-  blokje_verwijderd = false;
+  if((millis() - start_tijd) > 20000)
+  {
+    motor.stop();
+    blokje_verwijderd = true;
+  }
 }
 
 bool ZoekModus::blokjeVerwijderd()
 {
   return blokje_verwijderd;
+}
+
+void ZoekModus::startZoekMode()
+{
+  start_tijd = millis();
+
+  motor.rechtdoor(300);
+  delay(1000);
+  motor.stop();
 }
