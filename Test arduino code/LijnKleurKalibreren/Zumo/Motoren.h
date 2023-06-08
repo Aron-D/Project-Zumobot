@@ -16,6 +16,7 @@ public:
   void setSpeeds(int links, int rechts);
   void draai90links();
   void draai90rechts();
+  void stap();
 
 private:
   Zumo32U4Motors motors;
