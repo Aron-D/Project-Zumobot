@@ -55,6 +55,7 @@ void LijnVolgen::bocht_registratie()
 
 void LijnVolgen::standaardModus()
 {
+
   error = lijnSensor.error();
   
   int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
@@ -80,5 +81,7 @@ void LijnVolgen::standaardModus()
       motoren.draai90rechts();
       volgendeBocht = "";
     }
+    
+
   }
 }

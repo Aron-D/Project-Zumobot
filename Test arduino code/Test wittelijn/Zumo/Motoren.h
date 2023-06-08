@@ -24,3 +24,6 @@ private:
 };
 
 #endif
+
+
+//(lijnSensor.lees_sensor(0) < 150 && lijnSensor.lees_sensor(1) < 150 && lijnSensor.lees_sensor(2) < 150 &&lijnSensor.lees_sensor(3) < 150 &&lijnSensor.lees_sensor(4) < 150)
