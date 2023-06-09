@@ -1,8 +1,10 @@
 #include "LijnVolgen.h"
 #include "Motoren.h"
+#include "ZoekModus.h"
 // Gebruik voor seriële communicatie: #include <Wire.h>
 
-LijnVolgen lijnVolgen;;
+LijnVolgen lijnVolgen;
+ZoekModus ZoekModus;
 
 void setup() 
 {
