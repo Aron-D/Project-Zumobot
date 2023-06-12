@@ -1,34 +1,14 @@
 #include "LijnVolgen.h"
 
-LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(200), volgendeBocht("") {}
+LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(300), volgendeBocht("") {}
+
+LijnVolgen::LijnVolgen(LijnSensor& ls, Motoren& m) : lastError(0), error(0), maxSpeed(300), volgendeBocht(""), lijnSensor(ls), motoren(m) {}
 
 void LijnVolgen::init()
 {
   lijnSensor.initialiseren();
   lijnSensor.kalibreren(motoren);
 }
-
-/* void LijnVolgen::bocht_registratie()
-{
-  int grijsCounterLinks = 0;
-  int grijsCounterRechts = 0;
-  while (lijnSensor.lees_sensor(0) > 200 && lijnSensor.lees_sensor(0) < 800)
-  {
-    grijsCounterLinks += 1;
-  }
-  if (grijsCounterLinks > 6)
-  {
-    volgendeBocht = "links";
-  }
-  while (lijnSensor.lees_sensor(4) > 200 && lijnSensor.lees_sensor(4) < 800)
-  {
-    grijsCounterRechts += 1;
-  }
-  if (grijsCounterRechts > 6)
-  {
-    volgendeBocht = "rechts";
-  }
-} */
 
 void LijnVolgen::bocht_registratie()
 {
@@ -69,7 +49,7 @@ void LijnVolgen::standaardModus()
 
   motoren.setSpeeds(snelheidLinks, snelheidRechts);
 
-  if ((lijnSensor.lees_sensor(0) > 1500) || (lijnSensor.lees_sensor(4) > 1500))
+  /*if ((lijnSensor.lees_sensor(0) > 1500) || (lijnSensor.lees_sensor(4) > 1500))
   {
     if (volgendeBocht == "links")
     {
@@ -81,7 +61,5 @@ void LijnVolgen::standaardModus()
       motoren.draai90rechts();
       volgendeBocht = "";
     }
-    
-
-  }
+  }*/
 }

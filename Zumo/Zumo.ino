@@ -1,12 +1,16 @@
 #include "LijnVolgen.h"
-#include "Motoren.h"
 #include "ZoekModus.h"
-// Gebruik voor seriële communicatie: #include <Wire.h>
+#include "LijnSensor.h"
+#include "Motoren.h"
 
-LijnVolgen lijnVolgen;
-ZoekModus ZoekModus;
+LijnSensor lijnSensoren;
+Motoren motoren;
+LijnVolgen lijnVolgen(lijnSensoren, motoren);
+ZoekModus zoekModus;
+bool zoekenActief = false;
+bool standaardActief = true;
 
-void setup() 
+void setup()
 {
   delay(1000);
   lijnVolgen.init();
@@ -14,6 +18,30 @@ void setup()
 
 void loop() 
 {
-  lijnVolgen.bocht_registratie();
-  lijnVolgen.standaardModus();
+  while (standaardActief)
+  {
+    lijnVolgen.standaardModus();
+
+    if (lijnSensoren.lees_kleur(0) == "bruin")
+    {
+      zoekenActief = true;
+      standaardActief = false;
+
+      motoren.stop(); // testing...
+      delay(2000); // testing...
+
+      zoekModus.startZoekMode();
+    }
+  }
+
+  while (zoekenActief)
+  {
+    zoekModus.zoekBlokje();
+
+    if (zoekModus.blokjeVerwijderd())
+    {
+      zoekenActief = false;
+      standaardActief = false;
+    }
+  }
 }

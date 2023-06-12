@@ -8,14 +8,15 @@ class LijnVolgen
 {
 public:
   LijnVolgen();
+  LijnVolgen(LijnSensor&, Motoren&);
   void init();
   void standaardModus();
   void bocht_registratie();
   String volgendeBocht;
 
 private:
-  Motoren motoren;
-  LijnSensor lijnSensor;
+  Motoren& motoren;
+  LijnSensor& lijnSensor;
   int16_t lastError;
   int16_t error;
   int16_t maxSpeed;

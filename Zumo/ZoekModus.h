@@ -1,7 +1,6 @@
 #pragma once
 #include "Motoren.h"
 #include "ObjectDetector.h"
-#include "LijnSensor.h"
 
 class ZoekModus
 {

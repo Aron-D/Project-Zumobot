@@ -22,19 +22,23 @@ void LijnSensor::kalibreren(Motoren& m)
 
   Serial.println("Kleuren kalibratie");
 
+  /*
   //kalibreer kleur detectie zwart
   Serial.println("Zet de zumo op een zwarte lijn");
   delay(3000);
   buzzer.playFrequency(220, 200, 15); //begin kalibreren
   kalibreer_kleuren(zwartMaximumWaarde, zwartMaximumWaarde, m);
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
+  */
   
+  /*
   //kalibreer kleur detectie grijs
   Serial.println("Zet de zumo op een grijze lijn");
   delay(3000);
   buzzer.playFrequency(220, 200, 15); //begin kalibreren
   kalibreer_kleuren(grijsMinimumWaarde, grijsMaximumWaarde, m);
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
+  */
   
   //kalibreer kleur detectie bruin
   Serial.println("Zet de zumo op een bruine lijn");
@@ -50,12 +54,16 @@ void LijnSensor::kalibreren(Motoren& m)
   kalibreer_kleuren(groenMinimumWaarde, groenMaximumWaarde, m);
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
 
-
+  /*
   //kalibreer kleur detectie zwart
   Serial.println("\nLijn kalibratie");
   Serial.println("Zet de zumo op een zwarte lijn");
   delay(3000);
   buzzer.playFrequency(220, 200, 15);
+  */
+
+  delay(2000);
+
   for(uint16_t i = 0; i < 120; i++)
   {
     if (i > 30 && i <= 90)
