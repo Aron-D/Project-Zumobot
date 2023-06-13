@@ -35,19 +35,25 @@ void LijnVolgen::bocht_registratie()
 
 void LijnVolgen::standaardModus()
 {
+  if (lijnSensor.lees_sensor(0) < 300 && lijnSensor.lees_sensor(1) < 300 && lijnSensor.lees_sensor(2) < 300 && lijnSensor.lees_sensor(3) < 300 && lijnSensor.lees_sensor(4) < 300)
+  {
+    motoren.rechtdoor(200);
+  }
+  else
+  {
+    error = lijnSensor.error();
+    
+    int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
+    lastError = error;
 
-  error = lijnSensor.error();
-  
-  int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
-  lastError = error;
+    int16_t snelheidLinks = maxSpeed + snelheidsVerschil;
+    int16_t snelheidRechts = maxSpeed - snelheidsVerschil;
 
-  int16_t snelheidLinks = maxSpeed + snelheidsVerschil;
-  int16_t snelheidRechts = maxSpeed - snelheidsVerschil;
+    snelheidLinks = constrain(snelheidLinks, -maxSpeed, maxSpeed);
+    snelheidRechts = constrain(snelheidRechts, -maxSpeed, maxSpeed);
 
-  snelheidLinks = constrain(snelheidLinks, -maxSpeed, maxSpeed);
-  snelheidRechts = constrain(snelheidRechts, -maxSpeed, maxSpeed);
-
-  motoren.setSpeeds(snelheidLinks, snelheidRechts);
+    motoren.setSpeeds(snelheidLinks, snelheidRechts);
+  }
 
   /*if ((lijnSensor.lees_sensor(0) > 1500) || (lijnSensor.lees_sensor(4) > 1500))
   {

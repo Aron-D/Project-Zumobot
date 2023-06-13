@@ -20,11 +20,11 @@ void ZoekModus::zoekBlokje()
     motor.rechtdoor(400);
     break;
   case Richting::Links:
-    motor.rijLinks(400);
+    motor.rijRechts(400);
     delay(50);
     break;
   case Richting::Rechts:
-    motor.rijRechts(400);
+    motor.rijLinks(400);
     delay(50);
     break;
   case Richting::Geen:
