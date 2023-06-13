@@ -16,7 +16,8 @@ void LijnVolgen::stop_registratie()
   if (lijnSensor.lees_kleur(0) == "grijs" && lijnSensor.lees_kleur(4) == "grijs")
   {
     motoren.stop();
-    delay(5000);
+    delay(2000);
+    
     Serial.println("poep");
   }
   else
