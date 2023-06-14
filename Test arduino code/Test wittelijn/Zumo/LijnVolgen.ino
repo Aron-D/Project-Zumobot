@@ -2,7 +2,7 @@
 #include "LijnSensor.h"
 #include "Motoren.h"
 
-LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(200), volgendeBocht("") {}
+LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(150), volgendeBocht("") {}
 
 void LijnVolgen::init()
 {
@@ -44,10 +44,12 @@ void LijnVolgen::bocht_registratie()
       if (lijnSensor.lees_kleur(0) == "grijs"/* && lijnSensor.lees_kleur(1) == "grijs"*/)
       {
         volgendeBocht = "links";
+        motoren.draai90links();
       }
       else if (lijnSensor.lees_kleur(4) == "grijs"/* && lijnSensor.lees_kleur(3) == "grijs"*/)
       {
         volgendeBocht = "rechts";
+        motoren.draai90rechts();
       }
       
       Serial.println(volgendeBocht);
@@ -72,23 +74,23 @@ void LijnVolgen::standaardModus()
 
   motoren.setSpeeds(snelheidLinks, snelheidRechts);
 
-  if ((lijnSensor.lees_sensor(0) > 1500) || (lijnSensor.lees_sensor(4) > 1500))
-  {
-    if (volgendeBocht == "links")
-    {
-      motoren.draai90links();
-      volgendeBocht = "";
-    }
-    else if (volgendeBocht == "rechts")
-    {
-      motoren.draai90rechts();
-      volgendeBocht = "";
-    }
+  // if ((lijnSensor.lees_sensor(0) > 1500) || (lijnSensor.lees_sensor(4) > 1500))
+  // {
+  //   if (volgendeBocht == "links")
+  //   {
+  //     motoren.draai90links();
+  //     volgendeBocht = "";
+  //   }
+  //   else if (volgendeBocht == "rechts")
+  //   {
+  //     motoren.draai90rechts();
+  //     volgendeBocht = "";
+  //   }
     
-  }
+  
   }
   else {
-    motoren.rechtdoor(200);
+    motoren.rechtdoor(300);
     
 
   }
