@@ -22,7 +22,6 @@ void loop()
   {
     lijnVolgen.standaardModus();
 
-    /*
     if (lijnSensoren.lees_kleur(0) == "testing") // vervang testing door bruin...
     {
       zoekenActief = true;
@@ -33,7 +32,6 @@ void loop()
 
       zoekModus.startZoekMode();
     }
-    */
   }
 
   while (zoekenActief)

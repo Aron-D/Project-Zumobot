@@ -40,14 +40,12 @@ void LijnSensor::kalibreren(Motoren& m)
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
   */
   
-  /*
   //kalibreer kleur detectie bruin
   Serial.println("Zet de zumo op een bruine lijn");
   delay(3000);
   buzzer.playFrequency(220, 200, 15); //begin kalibreren
   kalibreer_kleuren(bruinMinimumWaarde, bruinMaximumWaarde, m);
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
-  */
 
   /*
   //kalibreer kleur detectie groen
