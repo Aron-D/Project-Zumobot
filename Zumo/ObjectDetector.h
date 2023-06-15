@@ -1,6 +1,7 @@
 #pragma once
 #include <Zumo32U4ProximitySensors.h>
 
+/* Dit is een lijst met de richtingen waarin een object gedetecteerd kan worden. */
 enum class Richting
 {
   Links,
@@ -9,6 +10,10 @@ enum class Richting
   Geen
 };
 
+/*
+Deze klasse kan gebruikt worden om te kijken of de Zumo objecten ziet, en waar deze objecten zich bevinden.
+Om objecten te kunnen zien maakt deze klasse gebruik van de proximity sensoren op de Zumo.
+*/
 class ObjectDetector
 {
 private:
