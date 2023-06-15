@@ -1,29 +1,32 @@
 #include "LijnVolgen.h"
 
+/* constructor voor Lijnvolgen */
 LijnVolgen::LijnVolgen() : lastError(0), error(0), maxSpeed(300), volgendeBocht("") {}
 
+/* contructor voor Lijnvolgen */
 LijnVolgen::LijnVolgen(LijnSensor& ls, Motoren& m) : lastError(0), error(0), maxSpeed(300), volgendeBocht(""), lijnSensor(ls), motoren(m) {}
 
+/* Functie die alles dat nodig is om de sensors te calibreren aanroept */
 void LijnVolgen::init()
 {
   lijnSensor.initialiseren();
   lijnSensor.kalibreren(motoren);
 }
 
+/* checkt de buitenste 2 kleursensors voor de kleur grijs en slaat de richting waar hij grijs registreerd op in 'volgendebocht' */
 void LijnVolgen::bocht_registratie()
 {
+  /* checkt de buitenste 2 sensors voor grijs en slaat de richting op in 'volgendebocht' */
   if (volgendeBocht == "")
   {
-    if ((lijnSensor.lees_kleur(0) == "grijs" /*&& lijnSensor.lees_kleur(1) == "grijs"*/) || (lijnSensor.lees_kleur(4) == "grijs" /*&& lijnSensor.lees_kleur(3) == "grijs"*/))
+    if ((lijnSensor.lees_kleur(0) == "grijs") || (lijnSensor.lees_kleur(4) == "grijs" ))
     {
-      //motoren.stap();
-      //delay(500);
-
-      if (lijnSensor.lees_kleur(0) == "grijs"/* && lijnSensor.lees_kleur(1) == "grijs"*/)
+      
+      if (lijnSensor.lees_kleur(0) == "grijs")
       {
         volgendeBocht = "links";
       }
-      else if (lijnSensor.lees_kleur(4) == "grijs"/* && lijnSensor.lees_kleur(3) == "grijs"*/)
+      else if (lijnSensor.lees_kleur(4) == "grijs")
       {
         volgendeBocht = "rechts";
       }
@@ -32,7 +35,7 @@ void LijnVolgen::bocht_registratie()
     }
   }
 }
-
+/*  */
 void LijnVolgen::standaardModus()
 {
   if (lijnSensor.lees_sensor(0) < 300 && lijnSensor.lees_sensor(1) < 300 && lijnSensor.lees_sensor(2) < 300 && lijnSensor.lees_sensor(3) < 300 && lijnSensor.lees_sensor(4) < 300)
@@ -55,17 +58,5 @@ void LijnVolgen::standaardModus()
     motoren.setSpeeds(snelheidLinks, snelheidRechts);
   }
 
-  /*if ((lijnSensor.lees_sensor(0) > 1500) || (lijnSensor.lees_sensor(4) > 1500))
-  {
-    if (volgendeBocht == "links")
-    {
-      motoren.draai90links();
-      volgendeBocht = "";
-    }
-    else if (volgendeBocht == "rechts")
-    {
-      motoren.draai90rechts();
-      volgendeBocht = "";
-    }
-  }*/
+
 }

@@ -1,6 +1,6 @@
 /*!
   @file LijnSensor.ino
-  @author Ruben van Eijken
+  @author Ruben van Eijken, Luka Grouwstra, Ziggy Gerbrands
 
   Implementatie van de klasse "LijnSensor".
 */
@@ -22,23 +22,23 @@ void LijnSensor::kalibreren(Motoren& m)
 
   Serial.println("Kleuren kalibratie");
 
-  /*
+  
   //kalibreer kleur detectie zwart
   Serial.println("Zet de zumo op een zwarte lijn");
   delay(3000);
   buzzer.playFrequency(220, 200, 15); //begin kalibreren
   kalibreer_kleuren(zwartMaximumWaarde, zwartMaximumWaarde, m);
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
-  */
   
-  /*
+  
+  
   //kalibreer kleur detectie grijs
   Serial.println("Zet de zumo op een grijze lijn");
   delay(3000);
   buzzer.playFrequency(220, 200, 15); //begin kalibreren
   kalibreer_kleuren(grijsMinimumWaarde, grijsMaximumWaarde, m);
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
-  */
+  
   
   //kalibreer kleur detectie bruin
   Serial.println("Zet de zumo op een bruine lijn");
@@ -47,22 +47,22 @@ void LijnSensor::kalibreren(Motoren& m)
   kalibreer_kleuren(bruinMinimumWaarde, bruinMaximumWaarde, m);
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
 
-  /*
+  
   //kalibreer kleur detectie groen
   Serial.println("Zet de zumo op een groene lijn");
   delay(3000);
   buzzer.playFrequency(220, 200, 15); //begin kalibreren
   kalibreer_kleuren(groenMinimumWaarde, groenMaximumWaarde, m);
   buzzer.playFrequency(440, 200, 15); //eind kalibreren
-  */
+  
 
-  /*
+  
   //kalibreer kleur detectie zwart
   Serial.println("\nLijn kalibratie");
   Serial.println("Zet de zumo op een zwarte lijn");
   delay(3000);
   buzzer.playFrequency(220, 200, 15);
-  */
+  
 
   delay(2000);
 
@@ -98,6 +98,7 @@ void LijnSensor::kalibreer_kleuren(int& min, int& max, Motoren& m)
   }
 }
 
+/* scant de waarde van de meegegeven sensor en vergelijkt die met de gecalibreerde waardes van de kleuren om vervolgens de gevonden kleur te returnen. */
 String LijnSensor::lees_kleur(int sensor_nummer)
 {
   uint16_t kleursensors[5];

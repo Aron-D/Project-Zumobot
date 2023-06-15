@@ -1,3 +1,12 @@
+/*!
+  @file Zumo.ino
+  @author Ruben van Eijken, Luka Grouwstra, 
+
+  The main class for the Zumo, all main functions are called for here
+  The switch from StandaardModus to zoekModus upon detecting the color brown is also implemented here
+*/
+
+
 #include "LijnVolgen.h"
 #include "ZoekModus.h"
 #include "LijnSensor.h"
@@ -10,35 +19,39 @@ ZoekModus zoekModus;
 bool zoekenActief = false;
 bool standaardActief = true;
 
+
 void setup()
 {
+  /*runs right before the main loop of the program. Also initializes the sensors to calibrate them */
   delay(1000);
   lijnVolgen.init();
 }
 
 void loop()
 {
-  while (standaardActief)
+  while (standaardActief) /*check to see if standaardModus is enabled */
   {
-    lijnVolgen.standaardModus();
+    lijnVolgen.standaardModus(); /* activate the standaardModus */
 
-    if (lijnSensoren.lees_kleur(0) == "testing") // vervang testing door bruin...
+    /*checks if the sensors see the color brown, activates zoekModus if true */
+    if (lijnSensoren.lees_kleur(0) == "bruin") 
     {
       zoekenActief = true;
       standaardActief = false;
 
-      motoren.stop(); // testing...
-      delay(2000); // testing...
+      motoren.stop(); 
+      delay(2000); 
 
-      zoekModus.startZoekMode();
+      zoekModus.startZoekMode(); /* activates zoekMode */
     }
   }
 
-  while (zoekenActief)
+  while (zoekenActief) /* checks to see if zoekMode is enabled */
   {
-    zoekModus.zoekBlokje();
+    zoekModus.zoekBlokje(); /* activates zoekMode */
 
-    if (zoekModus.blokjeVerwijderd())
+    /* Deactivated both modes the moment the block is removed, ending the program */
+    if (zoekModus.blokjeVerwijderd()) 
     {
       zoekenActief = false;
       standaardActief = false;
