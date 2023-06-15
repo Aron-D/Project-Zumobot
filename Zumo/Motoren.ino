@@ -44,30 +44,39 @@ void Motoren::setSpeeds(int sL, int sR)
 /* zet een vast aantal draaislagen en reset/leest dan de encoders in, zolang het aantal die de encoders meten onder het aantal draaislagen zal de Zumo naar links blijven draaien. deze functie is zo ingestelt dat de Zumo precies een bocht van 90 graden maakt */
 void Motoren::draai90links()
 {
-  const int draaiSlagen =  1900; 
-  
-  encoders.getCountsAndResetRight();
+  const int draaiSlagen = 1900; /* Aantal encoder tellen om 90 graden te draaien */
 
+  encoders.getCountsAndResetRight(); /* Reset de teller van de rechterencoder naar 0 */
+
+  /*Blijf draaien totdat het gewenste aantal encoder tellen is bereikt */
   while (encoders.getCountsRight() < draaiSlagen)
   {
-    motors.setSpeeds(0, 200);
+    motors.setSpeeds(0, 200); /* Stel motorsnelheden in om de robot te laten draaien */
   }
 
-  motors.setSpeeds(0, 0); 
+  motors.setSpeeds(0, 0); /* Stop de motoren */
 }
+
 
 /* zet een vast aantal draaislagen en reset/leest dan de encoders in, zolang het aantal die de encoders meten onder het aantal draaislagen zal de Zumo naar rechts blijven draaien. deze functie is zo ingestelt dat de Zumo precies een bocht van 90 graden maakt */
 
 void Motoren::draai90rechts()
 {
-  const int draaiSlagen =  1900; 
-  
-  encoders.getCountsAndResetLeft();
+  const int draaiSlagen = 1900; /* Aantal encoder tellen om 90 graden te draaien */
+
+
+  encoders.getCountsAndResetLeft(); /* Reset de teller van de linkerencoder naar 0 */
+
+
+  /* Blijf draaien totdat het gewenste aantal encoder tellen is bereikt */
 
   while (encoders.getCountsLeft() < draaiSlagen)
   {
-    motors.setSpeeds(200, 0);
+    motors.setSpeeds(200, 0); /* Stel motorsnelheden in om de robot te laten draaien */
+
   }
 
-  motors.setSpeeds(0, 0); 
+  motors.setSpeeds(0, 0); /* Stop de motoren */
+
 }
+
