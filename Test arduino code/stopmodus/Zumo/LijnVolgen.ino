@@ -18,7 +18,7 @@ void LijnVolgen::stop_registratie()
     motoren.stop();
     delay(2000);
     
-    Serial.println("poep");
+    Serial.println("herkenning grijze lijn");
   }
   else
   {
