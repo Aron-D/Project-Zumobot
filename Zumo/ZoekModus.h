@@ -2,7 +2,7 @@
 #include "Motoren.h"
 #include "ObjectDetector.h"
 
-/* 
+/*!
 Als deze modus wordt geactiveerd zal de Zumo zoeken naar het blokje, en deze uit de cirkel dieuwen.
 */
 class ZoekModus

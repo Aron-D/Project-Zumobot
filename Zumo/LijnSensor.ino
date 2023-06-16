@@ -82,6 +82,7 @@ void LijnSensor::kalibreren(Motoren& m)
   buzzer.playFrequency(440, 200, 15);
 }
 
+/*! Meet van de elke kleur de minimum en maximum waarde om later te gebruiken voor kleurherkenning. */
 void LijnSensor::kalibreer_kleuren(int& min, int& max, Motoren& m)
 {
   uint16_t kleursensors[5];
@@ -98,7 +99,7 @@ void LijnSensor::kalibreer_kleuren(int& min, int& max, Motoren& m)
   }
 }
 
-/* scant de waarde van de meegegeven sensor en vergelijkt die met de gecalibreerde waardes van de kleuren om vervolgens de gevonden kleur te returnen. */
+/*! Scant de waarde van de meegegeven sensor en vergelijkt die met de gecalibreerde waardes van de kleuren om vervolgens de gevonden kleur te returnen. */
 String LijnSensor::lees_kleur(int sensor_nummer)
 {
   uint16_t kleursensors[5];

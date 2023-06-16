@@ -1,9 +1,18 @@
 /*!
-  @file Zumo.ino
-  @author Ruben van Eijken, Luka Grouwstra, 
+  @mainpage Groep 1.3
 
-  The main class for the Zumo, all main functions are called for here
-  The switch from StandaardModus to zoekModus upon detecting the color brown is also implemented here
+  Code voor de Zumo robot voor het project "Systems Engineering".
+  Met deze code kan de Zumo robot een parkoers afgelegen waarbij een zwarte lijn gevolgd wordt.
+  Ook heeft de Zumo wat extra functionaliteiten. Er kan een blokje binnen een cirkel worden gevonden.
+  De Zumo kan een stippellijn volgen en er kunnen verschillende kleuren herkend worden.
+*/
+
+/*!
+  @file Zumo.ino
+  @author Ruben van Eijken, Luka Grouwstra
+
+  The main class for the Zumo, all main functions are called for here.
+  The switch from StandaardModus to zoekModus upon detecting the color brown is also implemented here.
 */
 
 
@@ -19,21 +28,21 @@ ZoekModus zoekModus;
 bool zoekenActief = false;
 bool standaardActief = true;
 
-
+/*! Runs right before the main loop of the program. Also initializes the sensors to calibrate them */
 void setup()
 {
-  /*runs right before the main loop of the program. Also initializes the sensors to calibrate them */
   delay(1000);
   lijnVolgen.init();
 }
 
+/*! The loop routine runs over and over */
 void loop()
 {
-  while (standaardActief) /*check to see if standaardModus is enabled */
+  while (standaardActief) // Check to see if standaardModus is enabled
   {
-    lijnVolgen.standaardModus(); /* activate the standaardModus */
+    lijnVolgen.standaardModus(); // Activate the standaardModus
 
-    /*checks if the sensors see the color brown, activates zoekModus if true */
+    // Checks if the sensors see the color brown, activates zoekModus if true
     if (lijnSensoren.lees_kleur(0) == "bruin") 
     {
       zoekenActief = true;
@@ -42,15 +51,15 @@ void loop()
       motoren.stop(); 
       delay(2000); 
 
-      zoekModus.startZoekMode(); /* activates zoekMode */
+      zoekModus.startZoekMode(); // Activates zoekMode
     }
   }
 
-  while (zoekenActief) /* checks to see if zoekMode is enabled */
+  while (zoekenActief) // Checks to see if zoekMode is enabled
   {
-    zoekModus.zoekBlokje(); /* activates zoekMode */
+    zoekModus.zoekBlokje(); // Activates zoekMode
 
-    /* Deactivated both modes the moment the block is removed, ending the program */
+    // Deactivated both modes the moment the block is removed, ending the program
     if (zoekModus.blokjeVerwijderd()) 
     {
       zoekenActief = false;
