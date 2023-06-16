@@ -35,9 +35,10 @@ void LijnVolgen::bocht_registratie()
     }
   }
 }
-/*  */
+/* Volgt een zwarte lijn door op basis van de error de motoren aan te sturen. */
 void LijnVolgen::standaardModus()
 {
+  /* Wanneer alle sensoren 'wit' zien, oftewel een lage waarde, gaat de Zumo rechtvooruit. Is gemaakt voor stippellijnen. */
   if (lijnSensor.lees_sensor(0) < 300 && lijnSensor.lees_sensor(1) < 300 && lijnSensor.lees_sensor(2) < 300 && lijnSensor.lees_sensor(3) < 300 && lijnSensor.lees_sensor(4) < 300)
   {
     motoren.rechtdoor(200);
@@ -46,17 +47,19 @@ void LijnVolgen::standaardModus()
   {
     error = lijnSensor.error();
     
+    /* De eerste term kijkt alleen naar de huidige error. De tweede term kijkt naar hoeveel de error verandert is ten opzichte van de laatste keer dat de functie is uitgevoerd.
+    Op basis van deze termen wordt het snelheidsverschil tussen de motoren bepaald. */
     int16_t snelheidsVerschil = error / 1 + 4 * (error - lastError);
     lastError = error;
 
+    /* Bepaalt de snelheden voor de linker en rechter motor. */
     int16_t snelheidLinks = maxSpeed + snelheidsVerschil;
     int16_t snelheidRechts = maxSpeed - snelheidsVerschil;
 
+    /* Zorgt ervoor dat de minimale waarde en de maximale waarde beperkt zijn tot snelheden die de Zumo aan kan. */
     snelheidLinks = constrain(snelheidLinks, -maxSpeed, maxSpeed);
     snelheidRechts = constrain(snelheidRechts, -maxSpeed, maxSpeed);
 
     motoren.setSpeeds(snelheidLinks, snelheidRechts);
   }
-
-
 }
